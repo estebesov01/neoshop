@@ -2,12 +2,14 @@ from rest_framework import viewsets, status
 from rest_framework.response import Response
 
 from .models import CartItem
+from .permissions import IsOwnerOrReadOnly
 from .serializers import CartItemDetailSerializer, CartItemListSerializer
 
 
 class CartItemView(viewsets.ModelViewSet):
     queryset = CartItem.objects.all()
     serializer_class = CartItemDetailSerializer
+    permission_classes = [IsOwnerOrReadOnly, ]
 
     def list(self, request, *args, **kwargs):
         serializer = CartItemListSerializer(CartItem.objects.all(), many=True)

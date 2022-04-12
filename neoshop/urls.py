@@ -21,5 +21,8 @@ router.register(r'comment', CommentView)
 urlpatterns = [
 
     path('admin/', admin.site.urls),
-    path('', include(router.urls)),
+    path('api/', include(router.urls)),
+    path('auth/', include('djoser.urls')),
+    path('drf-auth/', include('rest_framework.urls'))
+
 ]

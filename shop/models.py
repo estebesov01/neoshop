@@ -42,8 +42,8 @@ class Comment(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     content = models.TextField()
-    author = models.ForeignKey(User, on_delete=models.CASCADE)
-    replies = models.ForeignKey('self', on_delete=models.SET_NULL, null=True, blank=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    replies = models.ForeignKey('self', on_delete=models.SET_NULL, null=True, blank=True, related_name='children')
 
     def __str__(self):
-        return f'{self.author} {self.product} {self.rate}'
+        return f'{self.user} {self.product} {self.rate}'
