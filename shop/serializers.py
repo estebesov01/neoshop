@@ -39,12 +39,12 @@ class RecursiveSerializer(serializers.Serializer):
 class CommentSerializer(serializers.ModelSerializer):
     children = RecursiveSerializer(many=True)
     product = serializers.StringRelatedField()
-    author = serializers.StringRelatedField()
+    user = serializers.StringRelatedField()
 
     class Meta:
         list_serializer_class = FilterCommentSerializer
         model = Comment
-        fields = ['rate', 'created', 'product', 'content', 'author', 'children']
+        fields = ['rate', 'created', 'product', 'content', 'user', 'children']
 
 
 class CommentListSerializer(serializers.ModelSerializer):

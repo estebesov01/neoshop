@@ -1,5 +1,6 @@
-from django.urls import path, include
+from django.urls import path, include, re_path
 from rest_framework.routers import DefaultRouter
+from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView, TokenVerifyView
 from django.contrib import admin
 from cart.views import CartItemView
 from orders.views import OrderView, OrderItemView
@@ -22,7 +23,12 @@ urlpatterns = [
 
     path('admin/', admin.site.urls),
     path('api/', include(router.urls)),
-    path('auth/', include('djoser.urls')),
-    path('drf-auth/', include('rest_framework.urls'))
+    path('user/', include('djoser.urls')),
+    path('auth/', include('rest_framework.urls')),
+    re_path(r'^auth/', include('djoser.urls.authtoken')),
+    path('jwt/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('jwt/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+    path('jwt/token/verify', TokenVerifyView.as_view(), name='token_verify')
+
 
 ]

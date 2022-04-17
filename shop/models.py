@@ -1,6 +1,7 @@
 from django.contrib.auth.models import User
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models
+from users.models import CustomUser
 
 
 class Category(models.Model):
@@ -24,7 +25,7 @@ class Product(models.Model):
     updated = models.DateTimeField(auto_now=True)
     discount = models.IntegerField(
         validators=[MinValueValidator(0), MaxValueValidator(100)])
-    supplier = models.ForeignKey(User, on_delete=models.CASCADE)
+    supplier = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.name
@@ -42,7 +43,7 @@ class Comment(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     content = models.TextField()
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     replies = models.ForeignKey('self', on_delete=models.SET_NULL, null=True, blank=True, related_name='children')
 
     def __str__(self):

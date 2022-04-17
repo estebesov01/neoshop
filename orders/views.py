@@ -1,6 +1,7 @@
 from rest_framework import viewsets, status
 from rest_framework.response import Response
-
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.authentication import TokenAuthentication
 from cart.models import CartItem
 from .models import Order, OrderItem
 from .permissions import IsOwner
@@ -10,7 +11,8 @@ from .serializers import OrderListSerializer, OrderItemSerializer
 class OrderView(viewsets.ModelViewSet):
     queryset = Order.objects.all()
     serializer_class = OrderListSerializer
-    permission_classes = [IsOwner, ]
+    permission_classes = [IsAuthenticated, IsOwner, ]
+
 
     def create(self, request, *args, **kwargs):
         order = OrderListSerializer(data=request.data)
@@ -41,7 +43,7 @@ class OrderView(viewsets.ModelViewSet):
 class OrderItemView(viewsets.ModelViewSet):
     queryset = OrderItem.objects.all()
     serializer_class = OrderItemSerializer
-    permission_classes = [IsOwner, ]
+    permission_classes = [IsAuthenticated, IsOwner, ]
     http_method_names = ['get', ]
 
     def list(self, request, *args, **kwargs):

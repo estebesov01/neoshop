@@ -1,6 +1,5 @@
 from decimal import Decimal
-
-from django.contrib.auth.models import User
+from users.models import CustomUser
 from django.db import models
 
 from shop.models import Product
@@ -8,7 +7,7 @@ from shop.models import Product
 
 class Order(models.Model):
     created = models.DateTimeField(auto_now_add=True)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     coupon = models.CharField(max_length=128, blank=True)
 
     def __str__(self):
@@ -19,7 +18,7 @@ class OrderItem(models.Model):
     order = models.ForeignKey(Order, on_delete=models.CASCADE)
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     quantity = models.PositiveBigIntegerField()
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     total_price = models.PositiveBigIntegerField()
 
     def save(self, *args, **kwargs):
