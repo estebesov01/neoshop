@@ -23,12 +23,10 @@ urlpatterns = [
 
     path('admin/', admin.site.urls),
     path('api/', include(router.urls)),
-    path('user/', include('djoser.urls')),
-    path('auth/', include('rest_framework.urls')),
+    path('user/', include('djoser.urls'), name='user'),
+    path('auth/', include('rest_framework.urls'), name='auth'),
     re_path(r'^auth/', include('djoser.urls.authtoken')),
     path('jwt/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('jwt/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
-    path('jwt/token/verify', TokenVerifyView.as_view(), name='token_verify')
-
-
+    path('jwt/token/verify', TokenVerifyView.as_view(), name='token_verify'),
 ]

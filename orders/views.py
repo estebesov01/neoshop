@@ -12,7 +12,7 @@ class OrderView(viewsets.ModelViewSet):
     queryset = Order.objects.all()
     serializer_class = OrderListSerializer
     permission_classes = [IsAuthenticated, IsOwner, ]
-
+    http_method_names = ['get', 'head', 'options', 'post']
 
     def create(self, request, *args, **kwargs):
         order = OrderListSerializer(data=request.data)
