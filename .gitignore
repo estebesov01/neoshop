@@ -2,4 +2,5 @@
 /db.sqlite3
 /products
 /.idea
-.env
+/.env
+/__pycache__

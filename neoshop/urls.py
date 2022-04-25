@@ -6,6 +6,7 @@ from cart.views import CartItemView
 from orders.views import OrderView, OrderItemView
 from shop.views import CategoryView, ProductView, CommentView
 from coupon.views import CouponView
+from .yasg import urlpatterns as doc_urls
 
 # Create a router and register our viewsets with it.
 router = DefaultRouter()
@@ -30,3 +31,4 @@ urlpatterns = [
     path('jwt/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     path('jwt/token/verify', TokenVerifyView.as_view(), name='token_verify'),
 ]
+urlpatterns += doc_urls

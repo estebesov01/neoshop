@@ -7,6 +7,7 @@ COPY requirements.txt /usr/src/requirements.txt
 RUN pip install --upgrade pip
 RUN pip install -r /usr/src/requirements.txt
 COPY . /usr/src/neoshop
+RUN python manage.py migrate --noinput
 RUN python manage.py collectstatic --noinput
 
 

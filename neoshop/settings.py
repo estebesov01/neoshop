@@ -40,13 +40,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-
     'shop.apps.ShopConfig',
     'cart.apps.CartConfig',
     'orders.apps.OrdersConfig',
     'coupon.apps.CouponConfig',
     'users.apps.UsersConfig',
     'rest_framework',
+    'drf_yasg',
     'rest_framework.authtoken',
     'djoser',
 
@@ -96,16 +96,6 @@ WSGI_APPLICATION = 'neoshop.wsgi.application'
 #         'PORT': config('DB_PORT'),
 #     }
 # }
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#         'NAME': 'neobis_drf_db',
-#         'USER': 'neobis_drf_user',
-#         'PASSWORD': 'neobis_drf_password',
-#         'HOST': 'db',
-#         'PORT': '5432',
-#     }
-# }
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
@@ -153,7 +143,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
 
 
 CORS_ORIGIN_ALLOW_ALL = True
@@ -197,3 +187,5 @@ SIMPLE_JWT = {
 }
 AUTH_USER_MODEL = 'users.CustomUser'
 AUTHENTICATION_BACKENDS = ['users.auth_backends.EmailBackend']
+CSRF_TRUSTED_ORIGINS = ["http://neoshop-drf.herokuapp.com"]
+CSRF_COOKIE_SECURE=False
