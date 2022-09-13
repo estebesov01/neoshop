@@ -18,7 +18,6 @@ class OrderListSerializer(serializers.ModelSerializer):
     coupon = serializers.CharField(allow_blank=True)
     total_price = serializers.SerializerMethodField()
 
-
     class Meta:
         model = Order
         fields = ['id', 'coupon', 'total_price']
@@ -36,7 +35,7 @@ class OrderListSerializer(serializers.ModelSerializer):
         except:
             is_coupon = None
         for item in OrderItem.objects.filter(order=obj.id):
-                total_price += item.total_price
+            total_price += item.total_price
         if is_coupon:
-            total_price = total_price - total_price * (is_coupon.discount/100)
+            total_price = total_price - total_price * (is_coupon.discount / 100)
         return total_price

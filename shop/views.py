@@ -39,5 +39,3 @@ class CommentView(viewsets.ModelViewSet):
     def list(self, request, *args, **kwargs):
         serializer = CommentSerializer(Comment.objects.all(), many=True)
         return Response(serializer.data)
-
-
